@@ -74,7 +74,7 @@ var tiempoEstrellaMin = 0.5;
 var tiempoEstrellaMax = 2.5;
 var estrellas = [];
 
-var tiempoRestante = 60; // Tiempo en segundos
+var tiempoRestante = 20; // Tiempo en segundos
 var temporizador; // Variable para guardar el intervalo
 
 function IniciarTemporizador() {
@@ -381,7 +381,7 @@ function CalcularDesplazamiento() {
 function FinalizarJuego() {
   parado = true;
   gameOver.style.display = "block";
-  textoScore.innerHTML = "Puntuacion total: " + score; // Muestra los puntos al final del juego
+  textoScore.innerHTML = "Total: " + score; // Muestra los puntos al final del juego
 
   // Centrar el texto de puntuación
   textoScore.classList.add("centrado"); // Añadir clase centrado
@@ -390,5 +390,15 @@ function FinalizarJuego() {
   var contenedorPuntos = document.querySelector(".puntos");
   if (contenedorPuntos) {
     contenedorPuntos.style.display = "none"; // Ocultar el contenedor de puntos
+  }
+
+  var contenedorTiempo = document.querySelector(".tiempo");
+  if (contenedorTiempo) {
+    contenedorTiempo.style.display = "none"; // Ocultar el contenedor de puntos
+  }
+
+  var contenedorTemporizador = document.querySelector(".temporizador");
+  if (contenedorTemporizador) {
+    contenedorTemporizador.style.display = "none"; // Ocultar el contenedor de puntos
   }
 }

@@ -43,7 +43,7 @@ body {
   bottom: 22px;
   left: 42px;
   z-index: 2;
-  background: url(./cohete.gif) no-repeat;
+  background: url(../img/cohete.gif) no-repeat;
   background-size: contain;
   background-position: center;
 }
@@ -90,11 +90,12 @@ body {
 }
 
 .game-over {
+  z-index: 1;
   display: none;
   position: absolute;
   width: 100%;
   text-align: center;
-  color: #7e928b;
+  color: #ffbd07;
   font-size: 30px;
   font-family: Verdana;
   font-weight: 700;
@@ -180,7 +181,7 @@ body {
   top: 5px;
   right: 15px;
   z-index: 10;
-  color: #d48871;
+  color: #ffbd07;
   font-family: Verdana;
   font-size: 30px;
   font-weight: bold;
@@ -217,7 +218,7 @@ body {
   z-index: 1;
   border:  solid 2px #fff;
   border-radius: 70px;
-  background-image: url("./asteroidee.png"); /* Cambia la ruta a tu GIF */
+  background-image: url("../img/asteroidee.png"); /* Cambia la ruta a tu GIF */
   background-size: cover; /* Asegúrate de que el GIF cubra todo el espacio del obstáculo */
   animation: move-obstacle 2s linear infinite; /* Animación para mover el obstáculo */
   animation: rotate 2s linear infinite; /* Añadido: animación de arcoíris */
