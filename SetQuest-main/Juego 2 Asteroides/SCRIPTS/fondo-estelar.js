@@ -12,7 +12,7 @@ const raindrops = [];
 function createRaindrop() {
     const x = canvas.width + 1; // Start off the right side of the canvas
     const y = Math.random() * canvas.height; // Random vertical position
-    const speed = Math.random() * 10 + 10; // Speed of the raindrop
+    const speed = Math.random() * 3 + 3; // Speed of the raindrop
     const length = Math.random() * 9 + 2; // Length of the raindrop
 
     raindrops.push({ x, y, speed, length });

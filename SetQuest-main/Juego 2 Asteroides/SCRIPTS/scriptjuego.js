@@ -1,4 +1,45 @@
-// Deshabilitar zoom con Ctrl + Rueda del ratón
+var leftArrow = document.getElementById("left-arrow");
+var rightArrow = document.getElementById("right-arrow");
+var upArrow = document.getElementById("up-arrow");
+var downArrow = document.getElementById("down-arrow");
+
+// Eventos de toque para las flechas
+leftArrow.addEventListener("touchstart", function () {
+  dinoVelX = -velocidadMovimiento; // Mover a la izquierda
+});
+
+rightArrow.addEventListener("touchstart", function () {
+  dinoVelX = velocidadMovimiento; // Mover a la derecha
+});
+
+upArrow.addEventListener("touchstart", function () {
+  dinoVelY = velocidadMovimiento; // Mover hacia arriba
+});
+
+downArrow.addEventListener("touchstart", function () {
+  dinoVelY = -velocidadMovimiento; // Mover hacia abajo
+});
+
+// Detener el movimiento al soltar la flecha
+leftArrow.addEventListener("touchend", function () {
+  dinoVelX = 0; // Detener el movimiento
+});
+
+rightArrow.addEventListener("touchend", function () {
+  dinoVelX = 0; // Detener el movimiento
+});
+
+upArrow.addEventListener("touchend", function () {
+  dinoVelY = 0; // Detener el movimiento
+});
+
+downArrow.addEventListener("touchend", function () {
+  dinoVelY = 0; // Detener el movimiento
+});
+
+
+
+/*Deshabilitar zoom con Ctrl + Rueda del ratón
 document.addEventListener(
   "wheel",
   function (e) {
@@ -8,6 +49,8 @@ document.addEventListener(
   },
   { passive: false }
 );
+*/
+
 
 // Deshabilitar zoom con Ctrl + teclas (+ o -)
 document.addEventListener("keydown", function (e) {
@@ -18,7 +61,6 @@ document.addEventListener("keydown", function (e) {
     e.preventDefault();
   }
 });
-
 
 //****** CODIGO DEL JUEGO  ********//
 var time = new Date();
@@ -74,7 +116,7 @@ var tiempoEstrellaMin = 0.5;
 var tiempoEstrellaMax = 2.5;
 var estrellas = [];
 
-var tiempoRestante = 20; // Tiempo en segundos
+var tiempoRestante = 60; // Tiempo en segundos
 var temporizador; // Variable para guardar el intervalo
 
 function IniciarTemporizador() {
@@ -121,7 +163,7 @@ function CrearObstaculo() {
 }
 
 function MoverObstaculos() {
-  var factorVelocidad = 2.5; // Ajusta la velocidad de los obstáculos
+  var factorVelocidad = 1.5; // Ajusta la velocidad de los obstáculos
 
   for (var i = obstaculos.length - 1; i >= 0; i--) {
     if (obstaculos[i].posX < -obstaculos[i].clientWidth) {
@@ -149,8 +191,10 @@ function VerificarColisionObstaculos() {
       dinoRect.y < obstaculoRect.y + obstaculoRect.height &&
       dinoRect.y + dinoRect.height > obstaculoRect.y
     ) {
+      if (score > 0) {
+        score -= 1; // Solo resta si el score es mayor a 0
+      }
       // Colisión detectada, restar puntos
-      score -= 1;
       textoScore.innerHTML = score; // Actualizar puntuación
       puntuacionCambio.innerHTML = "-1"; // Mostrar cambio de puntuación
       puntuacionCambio.style.color = "red"; // Cambiar el color a rojo
@@ -250,7 +294,7 @@ function Update() {
 }
 
 // Variables para la velocidad del dinosaurio
-var velocidadMovimiento = 200; // Velocidad en píxeles por segundo
+var velocidadMovimiento = 300; // Velocidad en píxeles por segundo
 var dinoVelX = 0; // Velocidad en el eje X
 var dinoVelY = 0; // Velocidad en el eje Y
 

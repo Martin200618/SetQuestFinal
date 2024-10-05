@@ -12,13 +12,13 @@ body {
 }
 
 .contenedor {
-  width: 1200px;
-  height: 500px;
+  width: 100vw; /* Cambiar a 100vw para que ocupe todo el ancho de la pantalla */
+  height: 100vh; /* Cambiar a 100vh para que ocupe todo el alto de la pantalla */
   margin: 0 auto;
   position: relative;
   background: linear-gradient(#000000, transparent) #000000;
   transition: background-color 1s linear;
-  overflow: hidden;
+  overflow: hidden; /* Ocultar elementos que se salgan del contenedor */
 }
 
 .mediodia {
@@ -34,18 +34,41 @@ body {
 }
 
 .dino {
-  border:  solid 2px #fff;
   border-radius: 100px;
-  padding: 0;
-  width: 70px;
-  height: 70px;
+  width: 10vw; /* Cambiar a vw para escalar con la pantalla */
+  height: 10vw; /* Cambiar a vw para escalar con la pantalla */
   position: absolute;
-  bottom: 22px;
-  left: 42px;
+  bottom: 5%; /* Ajustar para mantenerlo dentro del contenedor */
+  left: 5%; /* Ajustar para mantenerlo dentro del contenedor */
   z-index: 2;
   background: url(../img/cohete.gif) no-repeat;
   background-size: contain;
   background-position: center;
+}
+
+.controls {
+  position: fixed;
+  bottom: 5%; /* Ajustar para mantener la posición desde el fondo */
+  right: 0%; /* Ajustar para mantener la posición desde la derecha */
+  display: flex;
+  flex-direction: column; /* Coloca las flechas en columna */
+  justify-content: space-between;
+  width: 10vw; /* Usa una unidad relativa para ancho */
+  z-index: 1;
+}
+
+.arrow {
+  width: 5vw; /* Usa una unidad relativa para ancho */
+  height: 5vw; /* Mantiene la proporción de las flechas */
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  font-size: 2vw; /* Ajusta el tamaño de fuente relativo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  margin: 5px 0; /* Espacio entre las flechas */
 }
 
 .suelo {
@@ -58,33 +81,33 @@ body {
 }
 
 .nube {
-  width: 92px;
-  height: 92px;
+  width: 10vw; /* Cambiar a vw para escalar con la pantalla */
+  height: 10vw; /* Cambiar a vw para escalar con la pantalla */
   position: absolute;
   z-index: 0;
   background: url(img/nube.png) no-repeat;
-  background-size: 92px 26px;
+  background-size: cover; /* Cambiar a cover para que mantenga la proporción */
 }
 
 .score {
-  width: 100px;
-  height: 30px;
+  width: 10vw; /* Cambiar a vw para escalar con la pantalla */
+  height: 5vh; /* Cambiar a vh para escalar con la pantalla */
   position: absolute;
-  top: 5px;
-  right: 15px;
+  top: 5%;
+  right: 5%;
   z-index: 10;
   color: #828282;
   font-family: Verdana;
-  font-size: 30px;
+  font-size: 3vw; /* Ajustar a vw para escalar */
   font-weight: bold;
   text-align: right;
 }
 
 .score.centrado {
-  height: 100px;
-  width: 200px;
+  height: 10vh;
+  width: 30vw; /* Cambiar a vw para escalar con la pantalla */
   top: 70%; /* Centro verticalmente */
-  left: 49%; /* Centro horizontalmente */
+  left: 50%; /* Centro horizontalmente */
   transform: translate(-50%, -50%); /* Ajustar el elemento al centro */
   text-align: center; /* Alinear el texto al centro */
 }
@@ -96,7 +119,7 @@ body {
   width: 100%;
   text-align: center;
   color: #ffbd07;
-  font-size: 30px;
+  font-size: 3vw; /* Ajustar a vw para escalar */
   font-family: Verdana;
   font-weight: 700;
 }
@@ -136,8 +159,8 @@ body {
 
 .estrella {
   position: absolute;
-  width: 25px;
-  height: 25px;
+  width: 20px; /* Cambiar a px o vw */
+  height: 20px; /* Cambiar a px o vw */
   background-color: yellow; /* Color inicial, pero la animación lo reemplazará */
   clip-path: polygon(
     50% 0%,
@@ -167,23 +190,23 @@ body {
 .temporizador {
   text-align: center;
   top: 5px;
-  left: 15px;
+  left: 5px; /* Ajustar para mantener dentro del contenedor */
   color: #d48871;
   font-family: Verdana;
-  font-size: 30px;
+  font-size: 3vw; /* Ajustar a vw para escalar */
   font-weight: bold;
 }
 
 .scoreFinal {
-  width: 100px;
-  height: 30px;
+  width: 10vw; /* Cambiar a vw para escalar con la pantalla */
+  height: 5vh; /* Cambiar a vh para escalar con la pantalla */
   position: absolute;
-  top: 5px;
-  right: 15px;
+  top: 5%;
+  right: 5%;
   z-index: 10;
   color: #ffbd07;
   font-family: Verdana;
-  font-size: 30px;
+  font-size: 3vw; /* Ajustar a vw para escalar */
   font-weight: bold;
   text-align: right;
 }
@@ -191,37 +214,21 @@ body {
 .tiempo {
   z-index: 1;
   color: #d48871;
-  font-size: 30px;
+  font-size: 3vw; /* Ajustar a vw para escalar */
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: 900;
   text-align: center;
 }
 
-.puntos {
-  width: 100px;
-  height: 30px;
-  position: absolute;
-  top: 4px;
-  right: 100px;
-  z-index: 10;
-  color: #d48871;
-  font-family: Verdana;
-  font-size: 30px;
-  font-weight: bold;
-  text-align: right;
-}
-
 .obstaculo {
   position: absolute;
-  width: 120px; /* Ancho del obstáculo */
-  height: 120px; /* Alto del obstáculo */
+  width: 10vw; /* Cambiar a vw para escalar con la pantalla */
+  height: 10vw; /* Cambiar a vw para escalar con la pantalla */
   z-index: 1;
-  border:  solid 2px #fff;
   border-radius: 70px;
   background-image: url("../img/asteroidee.png"); /* Cambia la ruta a tu GIF */
   background-size: cover; /* Asegúrate de que el GIF cubra todo el espacio del obstáculo */
   animation: move-obstacle 2s linear infinite; /* Animación para mover el obstáculo */
-  animation: rotate 2s linear infinite; /* Añadido: animación de arcoíris */
 }
 
 /* Definir la animación de movimiento para los obstáculos */
@@ -248,4 +255,54 @@ body {
 
 .dino-parpadeo {
   animation: parpadeo 1s ease-in-out 3; /* Parpadea tres veces */
+}
+
+@media (max-width: 768px) {
+  .contenedor {
+    width: 100vw; /* Asegurar que el contenedor ocupe el 100% */
+    height: 100vh; /* Asegurar que el contenedor ocupe el 100% */
+  }
+
+  .obstaculo {
+    width: 8vw; /* Reducir el ancho en pantallas más pequeñas */
+    height: 8vw; /* Reducir la altura en pantallas más pequeñas */
+  }
+
+  .estrella {
+    width: 8px; /* Ajustar el tamaño de las estrellas */
+    height: 8px; /* Ajustar el tamaño de las estrellas */
+  }
+
+  .dino {
+    width: 8vw; /* Ajustar el tamaño del dino */
+    height: 8vw; /* Ajustar el tamaño del dino */
+  }
+
+  .controls {
+    height: 15vw; /* Ajustar el tamaño de los controles */
+    width: 15vw; /* Ajustar el tamaño de los controles */
+  }
+
+  .score,
+  .temporizador,
+  .puntos {
+    font-size: 4vw; /* Aumentar tamaño del texto */
+  }
+}
+
+@media (max-width: 480px) {
+  .contenedor {
+    width: 100vw; /* Asegurar que el contenedor ocupe el 100% */
+    height: 100vh; /* Asegurar que el contenedor ocupe el 100% */
+  }
+
+  .dino {
+    width: 20vw; /* Ajustar el tamaño aún más en pantallas muy pequeñas */
+    height: 20vw;
+  }
+
+  .controls {
+    height: 10vw; /* Ajustar el tamaño de los controles */
+    width: 10vw; /* Ajustar el tamaño de los controles */
+  }
 }
