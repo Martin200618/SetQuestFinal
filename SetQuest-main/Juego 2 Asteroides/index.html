@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asteroides</title>
+    <link rel="stylesheet" href="./estilos_fondo.css" />
+    <link rel="stylesheet" href="./stylejuego.css">
+  </head>
+  <body>
+    <audio
+      id="collision-sound"
+      src="./pieza-de-estrella-conseguida.mp3"
+    ></audio>
+
+    <audio id="collision-sound2" src="./perderpuntos.mp3"></audio>
+
+    <div class="contenedor">
+      <div class="suelo"></div>
+      <div class="dino"></div>
+      <div class="puntos">Puntos:</div>
+      <div class="score">0</div>
+      <h3 class="tiempo">Tiempo</h3>
+      <div class="temporizador">60</div>
+      <div id="puntuacionCambio" style="font-weight: bold; color: green"></div>
+      <!-- Elemento para mostrar cambio de puntaje -->
+      <!-- Temporizador agregado -->
+    </div>
+
+    <div class="game-over">Fin del juego</div>
+    <canvas id="rainfall"></canvas>
+    <script src="./fondo-estelar.js"></script>
+    <script src="./scriptjuego.js"></script>
+
+  </body>
+</html>

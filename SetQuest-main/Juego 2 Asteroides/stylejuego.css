@@ -1,0 +1,246 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.contenedor {
+  width: 1200px;
+  height: 500px;
+  margin: 0 auto;
+  position: relative;
+  background: linear-gradient(#000000, transparent) #000000;
+  transition: background-color 1s linear;
+  overflow: hidden;
+}
+
+.mediodia {
+  background-color: #000119;
+}
+
+.tarde {
+  background-color: #ffadad;
+}
+
+.noche {
+  background-color: #aca8c7;
+}
+
+.dino {
+  padding: 0;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  bottom: 22px;
+  left: 42px;
+  z-index: 2;
+  background: url(./cohete.gif) no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.suelo {
+  width: 200%;
+  height: 42px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-size: 50% 42px;
+}
+
+.nube {
+  width: 92px;
+  height: 92px;
+  position: absolute;
+  z-index: 0;
+  background: url(img/nube.png) no-repeat;
+  background-size: 92px 26px;
+}
+
+.score {
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  z-index: 10;
+  color: #828282;
+  font-family: Verdana;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.score.centrado {
+  height: 100px;
+  width: 200px;
+  top: 70%; /* Centro verticalmente */
+  left: 49%; /* Centro horizontalmente */
+  transform: translate(-50%, -50%); /* Ajustar el elemento al centro */
+  text-align: center; /* Alinear el texto al centro */
+}
+
+.game-over {
+  display: none;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: #7e928b;
+  font-size: 30px;
+  font-family: Verdana;
+  font-weight: 700;
+}
+
+@keyframes rainbow {
+  0% {
+    background-color: red;
+  }
+  14% {
+    background-color: orange;
+  }
+  20% {
+    background-color: rgb(255, 255, 255);
+  }
+  28% {
+    background-color: yellow;
+  }
+  42% {
+    background-color: rgb(0, 255, 0);
+  }
+  57% {
+    background-color: blue;
+  }
+  68% {
+    background-color: rgb(255, 0, 187);
+  }
+  71% {
+    background-color: indigo;
+  }
+  85% {
+    background-color: violet;
+  }
+  100% {
+    background-color: red;
+  }
+}
+
+.estrella {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: yellow; /* Color inicial, pero la animación lo reemplazará */
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  z-index: 1;
+}
+
+/* Definir la animación de rotación */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg); /* Comienza en 0 grados */
+  }
+  to {
+    transform: rotate(360deg); /* Gira 360 grados */
+  }
+}
+
+.temporizador {
+  text-align: center;
+  top: 5px;
+  left: 15px;
+  color: #d48871;
+  font-family: Verdana;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.scoreFinal {
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  z-index: 10;
+  color: #d48871;
+  font-family: Verdana;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.tiempo {
+  z-index: 1;
+  color: #d48871;
+  font-size: 30px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 900;
+  text-align: center;
+}
+
+.puntos {
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  top: 4px;
+  right: 100px;
+  z-index: 10;
+  color: #d48871;
+  font-family: Verdana;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.obstaculo {
+  position: absolute;
+  width: 120px; /* Ancho del obstáculo */
+  height: 120px; /* Alto del obstáculo */
+  z-index: 1;
+  background-image: url("./asteroidee.png"); /* Cambia la ruta a tu GIF */
+  background-size: cover; /* Asegúrate de que el GIF cubra todo el espacio del obstáculo */
+  animation: move-obstacle 2s linear infinite; /* Animación para mover el obstáculo */
+  animation: rotate 2s linear infinite; /* Añadido: animación de arcoíris */
+}
+
+/* Definir la animación de movimiento para los obstáculos */
+@keyframes move-obstacle {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes parpadeo {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.dino-parpadeo {
+  animation: parpadeo 1s ease-in-out 3; /* Parpadea tres veces */
+}
