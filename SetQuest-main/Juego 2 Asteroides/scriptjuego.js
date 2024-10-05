@@ -18,7 +18,9 @@ document.addEventListener("keydown", function (e) {
     e.preventDefault();
   }
 });
-//****** GAME LOOP ********//
+
+
+//****** CODIGO DEL JUEGO  ********//
 var time = new Date();
 var deltaTime = 0;
 
@@ -44,7 +46,7 @@ function Loop() {
   requestAnimationFrame(Loop);
 }
 
-//****** GAME LOGIC ********//
+//****** LOGICA DEL JUEGO  ********//
 var sueloY = 22;
 var velY = 0;
 var impulso = 900;

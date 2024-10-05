@@ -34,6 +34,8 @@ body {
 }
 
 .dino {
+  border:  solid 2px #fff;
+  border-radius: 100px;
   padding: 0;
   width: 70px;
   height: 70px;
@@ -213,6 +215,8 @@ body {
   width: 120px; /* Ancho del obstáculo */
   height: 120px; /* Alto del obstáculo */
   z-index: 1;
+  border:  solid 2px #fff;
+  border-radius: 70px;
   background-image: url("./asteroidee.png"); /* Cambia la ruta a tu GIF */
   background-size: cover; /* Asegúrate de que el GIF cubra todo el espacio del obstáculo */
   animation: move-obstacle 2s linear infinite; /* Animación para mover el obstáculo */
