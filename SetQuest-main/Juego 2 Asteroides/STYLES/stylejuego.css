@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -34,19 +35,25 @@ body {
 }
 
 .dino {
-  border-radius: 100px;
-  width: 10vw; /* Cambiar a vw para escalar con la pantalla */
-  height: 10vw; /* Cambiar a vw para escalar con la pantalla */
+  border: solid 1px #fff; /* Borde blanco */
+  border-radius: 20px; /* Sin bordes redondeados */
+  min-width: 60px; /* Tamaño mínimo */
+  min-height: 50px; /* Tamaño mínimo */
   position: absolute;
-  bottom: 5%; /* Ajustar para mantenerlo dentro del contenedor */
-  left: 5%; /* Ajustar para mantenerlo dentro del contenedor */
+  bottom: 5%; /* Mantenerlo dentro del contenedor */
+  left: 5%; /* Mantenerlo dentro del contenedor */
   z-index: 2;
-  background: url(../img/cohete.gif) no-repeat;
-  background-size: contain;
-  background-position: center;
+  background: url(../img/cohete.gif) no-repeat; /* Ruta al GIF */
+  background-size: contain; /* Asegura que el GIF se ajuste al contenedor */
+  background-position: center; /* Centra el GIF dentro del contenedor */
+  padding: 0; /* Elimina cualquier padding */
+  margin: 0; /* Elimina cualquier margen */
 }
 
+
+
 .controls {
+  display: none;
   position: fixed;
   bottom: 5%; /* Ajustar para mantener la posición desde el fondo */
   right: 0%; /* Ajustar para mantener la posición desde la derecha */
@@ -69,6 +76,11 @@ body {
   cursor: pointer;
   user-select: none;
   margin: 5px 0; /* Espacio entre las flechas */
+}
+
+.arrow:hover{
+  background-color: rgba(102, 102, 102, 0.8);
+  border:  #ffbd07 2px solid;
 }
 
 .suelo {
@@ -113,6 +125,7 @@ body {
 }
 
 .game-over {
+  margin-top: 5px;
   z-index: 1;
   display: none;
   position: absolute;
@@ -175,6 +188,9 @@ body {
     39% 35%
   );
   z-index: 1;
+
+  animation: rotate 2s linear infinite; /* Animación para mover el obstáculo */
+
 }
 
 /* Definir la animación de rotación */
@@ -212,6 +228,7 @@ body {
 }
 
 .tiempo {
+  font-weight: bold;
   z-index: 1;
   color: #d48871;
   font-size: 3vw; /* Ajustar a vw para escalar */
@@ -221,6 +238,7 @@ body {
 }
 
 .obstaculo {
+  border: solid 1px #Fff;
   position: absolute;
   width: 10vw; /* Cambiar a vw para escalar con la pantalla */
   height: 10vw; /* Cambiar a vw para escalar con la pantalla */
@@ -228,7 +246,7 @@ body {
   border-radius: 70px;
   background-image: url("../img/asteroidee.png"); /* Cambia la ruta a tu GIF */
   background-size: cover; /* Asegúrate de que el GIF cubra todo el espacio del obstáculo */
-  animation: move-obstacle 2s linear infinite; /* Animación para mover el obstáculo */
+  animation: rotate 5s linear infinite; /* Animación para mover el obstáculo */
 }
 
 /* Definir la animación de movimiento para los obstáculos */
@@ -274,8 +292,8 @@ body {
   }
 
   .dino {
-    width: 8vw; /* Ajustar el tamaño del dino */
-    height: 8vw; /* Ajustar el tamaño del dino */
+    width: 3vw; /* Ajustar el tamaño del dino */
+    height: 3vw; /* Ajustar el tamaño del dino */
   }
 
   .controls {

@@ -163,14 +163,14 @@ function CrearObstaculo() {
 }
 
 function MoverObstaculos() {
-  var factorVelocidad = 1.5; // Ajusta la velocidad de los obstáculos
+  var factorVelocidadOpstaculos = 1.7; // Ajusta la velocidad de los obstáculos
 
   for (var i = obstaculos.length - 1; i >= 0; i--) {
     if (obstaculos[i].posX < -obstaculos[i].clientWidth) {
       obstaculos[i].parentNode.removeChild(obstaculos[i]);
       obstaculos.splice(i, 1);
     } else {
-      obstaculos[i].posX -= CalcularDesplazamiento() * factorVelocidad;
+      obstaculos[i].posX -= CalcularDesplazamiento() * factorVelocidadOpstaculos;
       obstaculos[i].style.left = obstaculos[i].posX + "px";
     }
   }
@@ -185,16 +185,18 @@ function VerificarColisionObstaculos() {
     var dinoRect = dino.getBoundingClientRect();
     var obstaculoRect = obstaculo.getBoundingClientRect();
 
+    const margin = 20; // Ajustar según sea necesario
+
     if (
-      dinoRect.x < obstaculoRect.x + obstaculoRect.width &&
-      dinoRect.x + dinoRect.width > obstaculoRect.x &&
-      dinoRect.y < obstaculoRect.y + obstaculoRect.height &&
-      dinoRect.y + dinoRect.height > obstaculoRect.y
+      dinoRect.left + margin < obstaculoRect.left + obstaculoRect.width &&
+      dinoRect.left + dinoRect.width - margin > obstaculoRect.left &&
+      dinoRect.top + margin < obstaculoRect.top + obstaculoRect.height &&
+      dinoRect.top + dinoRect.height - margin > obstaculoRect.top
     ) {
+      // Aquí va la lógica de colisión
       if (score > 0) {
         score -= 1; // Solo resta si el score es mayor a 0
       }
-      // Colisión detectada, restar puntos
       textoScore.innerHTML = score; // Actualizar puntuación
       puntuacionCambio.innerHTML = "-1"; // Mostrar cambio de puntuación
       puntuacionCambio.style.color = "red"; // Cambiar el color a rojo
@@ -202,23 +204,19 @@ function VerificarColisionObstaculos() {
         puntuacionCambio.innerHTML = "";
       }, 1000); // Ocultar después de 1 segundo
 
-      // Reproducir el sonido de colisión
-      collisionSound.play();
+      collisionSound.play(); // Reproducir el sonido de colisión
+      dino.classList.add("dino-parpadeo"); // Añadir clase de parpadeo al dino
+      obstaculo.parentNode.removeChild(obstaculo); // Eliminar el obstáculo
+      obstaculos.splice(i, 1); // Quitar el obstáculo de la lista
 
-      // Añadir clase de parpadeo al dino
-      dino.classList.add("dino-parpadeo");
-
-      // Eliminar el obstáculo después de la colisión
-      obstaculo.parentNode.removeChild(obstaculo);
-      obstaculos.splice(i, 1);
-
-      // Remover la clase de parpadeo después de 1.5 segundos (para 3 parpadeos)
-      setTimeout(function () {
+      // Remover la clase de parpadeo después de 1.5 segundos
+      setTimeout(() => {
         dino.classList.remove("dino-parpadeo");
       }, 1500);
     }
   }
 }
+
 
 function GanarPunto() {
   score += 1; // Incrementar los puntos
@@ -260,14 +258,14 @@ function CrearEstrella() {
 }
 
 function MoverEstrellas() {
-  var factorVelocidad = 2.5; // Ajusta este valor para cambiar la velocidad de las estrellas
+  var factorVelocidadEstrellas = 2; // Ajusta este valor para cambiar la velocidad de las estrellas
 
   for (var i = estrellas.length - 1; i >= 0; i--) {
     if (estrellas[i].posX < -estrellas[i].clientWidth) {
       estrellas[i].parentNode.removeChild(estrellas[i]);
       estrellas.splice(i, 1);
     } else {
-      estrellas[i].posX -= CalcularDesplazamiento() * factorVelocidad;
+      estrellas[i].posX -= CalcularDesplazamiento() * factorVelocidadEstrellas;
       estrellas[i].style.left = estrellas[i].posX + "px";
     }
   }
