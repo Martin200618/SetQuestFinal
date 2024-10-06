@@ -496,5 +496,13 @@ function FinalizarJuego() {
   if (contenedorconstrols) {
     contenedorconstrols.style.display = "none"; // Ocultar el contenedor de temporizador
   }
+
+  var backgroundMusic = document.getElementById("background-music");
+  if (backgroundMusic) {
+    backgroundMusic.pause(); // Detiene la música
+    backgroundMusic.currentTime = 0; // Reinicia la música al inicio
+  }
+
+
 }
 
