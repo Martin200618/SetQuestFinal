@@ -37,8 +37,6 @@ downArrow.addEventListener("touchend", function () {
   dinoVelY = 0; // Detener el movimiento
 });
 
-
-
 /*Deshabilitar zoom con Ctrl + Rueda del ratón
 document.addEventListener(
   "wheel",
@@ -50,7 +48,6 @@ document.addEventListener(
   { passive: false }
 );
 */
-
 
 // Deshabilitar zoom con Ctrl + teclas (+ o -)
 document.addEventListener("keydown", function (e) {
@@ -79,6 +76,9 @@ function Init() {
   time = new Date();
   Start();
   Loop();
+
+  var backgroundMusic = document.getElementById("background-music");
+  backgroundMusic.play();
 }
 
 function Loop() {
@@ -170,7 +170,8 @@ function MoverObstaculos() {
       obstaculos[i].parentNode.removeChild(obstaculos[i]);
       obstaculos.splice(i, 1);
     } else {
-      obstaculos[i].posX -= CalcularDesplazamiento() * factorVelocidadOpstaculos;
+      obstaculos[i].posX -=
+        CalcularDesplazamiento() * factorVelocidadOpstaculos;
       obstaculos[i].style.left = obstaculos[i].posX + "px";
     }
   }
@@ -195,10 +196,13 @@ function VerificarColisionObstaculos() {
     ) {
       // Aquí va la lógica de colisión
       if (score > 0) {
-        score -= 1; // Solo resta si el score es mayor a 0
+        score -= 2; // Solo resta si el score es mayor a 0
+      } else {
+        score = 0; // Si no, el score se queda en 0
       }
+
       textoScore.innerHTML = score; // Actualizar puntuación
-      puntuacionCambio.innerHTML = "-1"; // Mostrar cambio de puntuación
+      puntuacionCambio.innerHTML = "-2"; // Mostrar cambio de puntuación
       puntuacionCambio.style.color = "red"; // Cambiar el color a rojo
       setTimeout(() => {
         puntuacionCambio.innerHTML = "";
@@ -216,7 +220,6 @@ function VerificarColisionObstaculos() {
     }
   }
 }
-
 
 function GanarPunto() {
   score += 1; // Incrementar los puntos
