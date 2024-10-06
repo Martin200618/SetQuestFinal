@@ -124,6 +124,7 @@ var sueloX = 0;
 var velEscenario = 1280 / 3;
 var gameVel = 1;
 var score = 0;
+var scoreAste = 0;
 
 var parado = false;
 var saltando = false;
@@ -217,6 +218,8 @@ function VerificarColisionObstaculos() {
       dinoRect.top + margin < obstaculoRect.top + obstaculoRect.height &&
       dinoRect.top + dinoRect.height - margin > obstaculoRect.top
     ) {
+
+      scoreAste += 1;
       // Aquí va la lógica de colisión
       if (score > 0) {
         score -= 2; // Solo resta si el score es mayor a 0
@@ -225,6 +228,7 @@ function VerificarColisionObstaculos() {
       }
 
       textoScore.innerHTML = score; // Actualizar puntuación
+      textoScoreAste.innerHTML = scoreAste; // Actualizar puntuación
       puntuacionCambio.innerHTML = "-2"; // Mostrar cambio de puntuación
       puntuacionCambio.style.color = "red"; // Cambiar el color a rojo
       setTimeout(() => {
@@ -302,6 +306,8 @@ function Start() {
   suelo = document.querySelector(".suelo");
   contenedor = document.querySelector(".contenedor");
   textoScore = document.querySelector(".score");
+  textoScoreAste = document.querySelector(".scoreAste");
+  
   dino = document.querySelector(".dino");
   document.addEventListener("keydown", HandleKeyDown);
   IniciarTemporizador(); // Inicia el temporizador
@@ -449,8 +455,9 @@ function CalcularDesplazamiento() {
 function FinalizarJuego() {
   parado = true;
   gameOver.style.display = "block";
-  textoScore.innerHTML = "Total: " + score; // Muestra los puntos al final del juego
-
+  textoScore.innerHTML = "¡Juego terminado!" + score  ;
+  textoScore.innerHTML = "  Estrellas: " + score; // Muestra los puntos al final del juego
+  textoScore.innerHTML += "<br> Asteroides: " + scoreAste;
   // Centrar el texto de puntuación
   textoScore.classList.add("centrado"); // Añadir clase centrado
 
@@ -462,11 +469,11 @@ function FinalizarJuego() {
 
   var contenedorTiempo = document.querySelector(".tiempo");
   if (contenedorTiempo) {
-    contenedorTiempo.style.display = "none"; // Ocultar el contenedor de puntos
+    contenedorTiempo.style.display = "none"; // Ocultar el contenedor de tiempo
   }
 
   var contenedorTemporizador = document.querySelector(".temporizador");
   if (contenedorTemporizador) {
-    contenedorTemporizador.style.display = "none"; // Ocultar el contenedor de puntos
+    contenedorTemporizador.style.display = "none"; // Ocultar el contenedor de temporizador
   }
 }
