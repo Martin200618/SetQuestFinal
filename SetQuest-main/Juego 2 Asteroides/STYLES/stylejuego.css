@@ -151,6 +151,7 @@ body {
 }
 
 .game-over {
+  top: 50px;
   margin-top: 5px;
   z-index: 1;
   display: none;
@@ -159,7 +160,6 @@ body {
   text-align: center;
   color: #ffbd07;
   font-size: 3vw; /* Ajustar a vw para escalar */
-  font-family: Verdana;
   font-weight: 700;
   animation: rainbow 2s linear infinite; /* Animación para mover el obstáculo */
   font-family: 'Orbitron', sans-serif;

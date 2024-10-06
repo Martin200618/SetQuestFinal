@@ -476,4 +476,25 @@ function FinalizarJuego() {
   if (contenedorTemporizador) {
     contenedorTemporizador.style.display = "none"; // Ocultar el contenedor de temporizador
   }
+
+  var contenedorscoreAste = document.querySelector(".scoreAste");
+  if (contenedorscoreAste) {
+    contenedorscoreAste.style.display = "none"; // Ocultar el contenedor de temporizador
+  }
+
+  var contenedorAsteimg = document.querySelector(".Asteimg");
+  if (contenedorAsteimg) {
+    contenedorAsteimg.style.display = "none"; // Ocultar el contenedor de temporizador
+  }
+
+  var contenedorestrellaimg = document.querySelector(".estrellaimg");
+  if (contenedorestrellaimg) {
+    contenedorestrellaimg.style.display = "none"; // Ocultar el contenedor de temporizador
+  }
+
+  var contenedorconstrols = document.querySelector(".controls");
+  if (contenedorconstrols) {
+    contenedorconstrols.style.display = "none"; // Ocultar el contenedor de temporizador
+  }
 }
+
