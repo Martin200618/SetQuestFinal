@@ -72,13 +72,36 @@ if (
   document.addEventListener("DOMContentLoaded", Init);
 }
 
-function Init() {
-  time = new Date();
-  Start();
-  Loop();
+// Función de cuenta regresiva antes de iniciar el juego
+function iniciaConteo(duration, callback) {
+  var countdownElement = document.querySelector('.conteo');
+  countdownElement.style.display = "block"; // Mostrar el contador
 
-  var backgroundMusic = document.getElementById("background-music");
-  backgroundMusic.play();
+  var remainingTime = duration;
+  countdownElement.innerHTML = remainingTime;
+
+  var countdownInterval = setInterval(function () {
+    remainingTime -= 1;
+    countdownElement.innerHTML = remainingTime;
+
+    if (remainingTime <= 0) {
+      clearInterval(countdownInterval);
+      countdownElement.style.display = "none"; // Ocultar el contador
+      callback(); // Iniciar el juego
+    }
+  }, 1000);
+}
+
+// Modifica Init para que el juego empiece después del conteo
+function Init() {
+  iniciaConteo(3, function () { // Cuenta regresiva de 3 segundos
+    time = new Date();
+    Start();
+    Loop();
+
+    var backgroundMusic = document.getElementById("background-music");
+    backgroundMusic.play();
+  });
 }
 
 function Loop() {
