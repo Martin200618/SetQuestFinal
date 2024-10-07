@@ -33,10 +33,30 @@
         <span></span>
         Crear
     </button>
-    
     <p class="message">¿Ya estas registrado? <a href="#">Inicia Sesión</a></p>
 </form>
 
+    <form class="login-form" method="POST" action="login.php">
+        <div class="logo">SetQuest</div>
+        <h2>Iniciar Sesión</h2>
+        <input type="email" name="correo" placeholder="Correo" required />
+        <input type="password" name="contraseña" placeholder="Contraseña" required />
+        
+        <!-- Botón con estilo -->
+        <button type="submit" class="btn">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Ingresar
+        </button>
+        
+        <p class="message">¿No estas registrado? <a href="#">Crea una cuenta</a></p>
+    </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="./Scripts/script.js"></script>
 <!-- JavaScript para mostrar alerta de registro exitoso -->
 <script>
     // Función para obtener parámetros de la URL
@@ -51,28 +71,5 @@
         alert('Registro exitoso. ¡Bienvenido!');
     }
 </script>
-                <form class="login-form" method="POST" action="login.php">
-                    <div class="logo">SetQuest</div>
-                    <h2>Iniciar Sesión</h2>
-                    <input type="email" name="correo" placeholder="Correo" required />
-                    <input type="password" name="contraseña" placeholder="Contraseña" required />
-                    
-                    <!-- Botón con estilo -->
-                    <button type="submit" class="btn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        Ingresar
-                    </button>
-                    
-                    <p class="message">¿No estas registrado? <a href="#">Crea una cuenta</a></p>
-                </form>
-                 </div>
-</div>
-                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                     <script src="./Scripts/script.js"></script>
-
-    
 </body>
 </html>
