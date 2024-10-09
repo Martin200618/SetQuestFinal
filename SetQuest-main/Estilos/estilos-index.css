@@ -52,6 +52,7 @@ header .logo{
     font-weight: bold;
 }
 header nav a{
+    font-family: 'Orbitron', sans-serif;
     margin-left: 30px;
     text-decoration: none;
     color: #ffffff;
