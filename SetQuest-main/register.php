@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";  // Cambia esto si tienes otro usuario
 $password = "";  // Cambia esto si tienes contraseña
-$dbname = "usuarios";
+$dbname = "setquest";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -12,13 +12,12 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre_completo = $_POST['nombre_completo'];
-    $nick = $_POST['nick'];
+    $nombre_ususario = $_POST['nombre_usuario'];
     $correo = $_POST['correo'];
     $contraseña = password_hash($_POST['contraseña'], PASSWORD_BCRYPT);
 
     // Validar que no se repita el correo ni el nick
-    $sql = "SELECT * FROM users WHERE correo='$correo' OR nick='$nick'";
+    $sql = "SELECT * FROM usuario WHERE correo='$correo' OR nombre_usuario='$nombre_ususario'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -28,14 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: registro.php?error=correo');
             exit();
         }
-        // Verificar si el nick ya está registrado
-        if ($row['nick'] == $nick) {
-            header('Location: registro.php?error=nick');
+        // Verificar si el nombre ya está registrado
+        if ($row['nombre_usuario'] == $nombre_usuario) {
+            header('Location: registro.php?error=nombre_usuario');
             exit();
         }
     } else {
         // Insertar el nuevo usuario
-        $sql = "INSERT INTO users (nombre_completo, nick, correo, contraseña) VALUES ('$nombre_completo', '$nick', '$correo', '$contraseña')";
+        $sql = "INSERT INTO usuario (nombre_usuario, correo, contraseña) VALUES ('$nombre_usuario', '$correo', '$contraseña')";
 
         if ($conn->query($sql) === TRUE) {
             // Registro exitoso, redirigir con éxito
@@ -46,6 +45,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
 $conn->close();
 ?>
