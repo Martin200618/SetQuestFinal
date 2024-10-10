@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asteroides</title>
+    <link rel="stylesheet" href="./STYLES/estilos_fondo.css" />
+    <link rel="stylesheet" href="./STYLES/stylejuego.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos para la nave */
+        .nave {
+            position: absolute;
+            width: 60px;
+            height: 50px;
+            background: url(../img/cohete.gif) no-repeat;
+            background-size: contain;
+            background-position: center; 
+        }
+
+        #crearSalaBtn {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          padding: 10px 20px;
+          font-size: 16px;
+          background-color: #4CAF50; 
+          color: white;
+          border: none;
+          cursor: pointer;
+          z-index: 99;
+        }
+        .lista-salas{
+          position: relative;
+          z-index: 99;
+        }
+    </style>
+  </head>
+  <body>
+    <audio
+      id="collision-sound"
+      src="./SONIDOS/pieza-de-estrella-conseguida.mp3"
+    ></audio>
+    <audio id="collision-sound2" src="./SONIDOS/perderpuntos.mp3"></audio>
+    <audio id="background-music" loop>
+      <source src="./SONIDOS/Musica_Fondo.mp3" type="audio/mp3">
+      Tu navegador no soporta la reproducción de audio.
+    </audio>
+    <div class="conteo"></div>
+
+    <div class="controls">
+      <div class="arrow left-arrow" id="left-arrow">←</div>
+      <div class="arrow right-arrow" id="right-arrow">→</div>
+      <div class="arrow up-arrow" id="up-arrow">↑</div>
+      <div class="arrow down-arrow" id="down-arrow">↓</div>
+    </div>
+
+    <div class="contenedor">
+      <div class="suelo"></div>
+      <div class="score"> 0</div>
+      <img class="estrellaimg" src="./img/estrella .png" alt="">
+      <div class="scoreAste"> 0</div>
+      <img class="Asteimg" src="./img/asteroidee.png" alt="">
+      <h3 class="tiempo">Tiempo</h3>
+      <div class="temporizador">60</div>
+      <div id="puntuacionCambio" style="font-weight: bold; color: green"></div>
+    </div>
+
+    <div class="lista-salas"></div>
+    <button id="crearSalaBtn" onclick="crearSala()">Crear Sala</button>
+
+    <div class="game-over">Fin del juego</div>
+    <canvas id="rainfall"></canvas>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./SCRIPTS/fondo-estelar.js"></script>
+    <script src="./SCRIPTS/scriptjuego.js"></script>
+  </body>
+</html>

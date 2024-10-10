@@ -1,0 +1,251 @@
+        /* Importar Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Bebas Neue', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-image: url('/SetQuest-main/Imagenes/Ranking-fondo.jpg'); /* Imagen de fondo */
+        }
+
+        /* Fondo oscuro semitransparente sobre la imagen de fondo */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+            z-index: -1;
+        }
+
+        /* Contenedor de Ranking */
+        .ranking-container {
+            z-index: 200;
+            width: 90%;
+            max-width: 600px;
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo semitransparente */
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #ffcc00;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(255, 204, 0, 0.7);
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
+            }
+            100% {
+                text-shadow: 0 0 20px #ffcc00, 0 0 30px #ffcc00, 0 0 40px #ffcc00;
+            }
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .player {
+            background-color: rgba(255, 255, 255, 0.1); /* Fondo inicial semitransparente */
+            border-radius: 10px;
+            margin: 10px 0;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 255, 0, 0.2);
+            position: relative;
+            opacity: 0;
+            animation: slideIn 0.5s forwards;
+        }
+
+        .player:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Fondo al pasar el cursor */
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(255, 255, 0, 0.5);
+        }
+
+        .player img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid #ffcc00;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+        }
+
+        .player-info {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .player-position {
+            font-size: 20px;
+            color: #ffcc00;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .player-name {
+            font-size: 24px;
+            color: #ffcc00;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .player-score {
+            font-size: 18px;
+            color: #ffffff;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+            .player-name {
+                font-size: 20px;
+            }
+            .player-score {
+                font-size: 16px;
+            }
+            .player-position {
+                font-size: 18px; /* Ajustar tamaño de posición */
+            }
+            .player img {
+                width: 40px; /* Tamaño de imagen más pequeño en móviles */
+                height: 40px;
+            }
+            .ranking-container {
+                padding: 15px; /* Menos padding en móviles */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px; /* Tamaño más pequeño para pantallas muy pequeñas */
+            }
+            .player-name {
+                font-size: 18px; /* Tamaño más pequeño para nombres */
+            }
+            .player-score {
+                font-size: 14px; /* Tamaño más pequeño para puntajes */
+            }
+        }
+
+        .boton-devolverse {
+            text-decoration: none;
+          font-family: "Orbitron", sans-serif;
+          position: absolute; /* Posición absoluta para colocar el botón donde queramos */
+          top: 20px; /* Distancia desde la parte superior de la pantalla */
+          left: 20px; /* Distancia desde la parte izquierda de la pantalla */
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: #5a5a5a; /* Color de fondo rojo */
+          color: white;
+          font-size: 1rem; /* Tamaño de fuente por defecto */
+          padding: 10px 20px; /* Espaciado interno del botón */
+          border-radius: 50px; /* Bordes redondeados */
+          cursor: pointer;
+          font-weight: 500;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
+          transition: background 0.3s ease, box-shadow 0.3s ease;
+          text-decoration: none; /* Elimina subrayado del enlace */
+          z-index: 10; /* Asegura que el botón esté por encima de otros elementos */
+        }
+        
+        .boton-devolverse:hover {
+          background: #00d0ff; /* Color de fondo al pasar el ratón */
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Más sombra al hacer hover */
+        }
+        
+        .boton-devolverse svg {
+          margin-right: 8px; /* Espacio entre el ícono y el texto */
+          fill: white; /* Color del ícono */
+          width: 20px; /* Ajuste del tamaño del ícono */
+          height: 20px;
+        }
+        
+        /* Responsive: Ajustes para pantallas más pequeñas */
+        @media (max-width: 768px) {
+          .boton-devolverse {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            top: 15px; /* Reduce el margen en pantallas más pequeñas */
+            left: 15px;
+          }
+        
+          .boton-devolverse svg {
+            width: 18px;
+            height: 18px;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .boton-devolverse {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            top: 10px; /* Más ajustes para pantallas móviles */
+            left: 10px;
+          }
+        
+          .boton-devolverse svg {
+            width: 16px;
+            height: 16px;
+          }
+        }
+        
+        
