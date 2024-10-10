@@ -188,7 +188,7 @@ function CrearObstaculo() {
 }
 
 function MoverObstaculos() {
-  var factorVelocidadOpstaculos = 1.7; // Ajusta la velocidad de los obstáculos
+  var factorVelocidadOpstaculos = 3; // Ajusta la velocidad de los obstáculos
 
   for (var i = obstaculos.length - 1; i >= 0; i--) {
     if (obstaculos[i].posX < -obstaculos[i].clientWidth) {
@@ -288,7 +288,7 @@ function CrearEstrella() {
 }
 
 function MoverEstrellas() {
-  var factorVelocidadEstrellas = 2; // Ajusta este valor para cambiar la velocidad de las estrellas
+  var factorVelocidadEstrellas = 2.7; // Ajusta este valor para cambiar la velocidad de las estrellas
 
   for (var i = estrellas.length - 1; i >= 0; i--) {
     if (estrellas[i].posX < -estrellas[i].clientWidth) {
@@ -324,7 +324,7 @@ function Update() {
 }
 
 // Variables para la velocidad del dinosaurio
-var velocidadMovimiento = 300; // Velocidad en píxeles por segundo
+var velocidadMovimiento = 320; // Velocidad en píxeles por segundo
 var dinoVelX = 0; // Velocidad en el eje X
 var dinoVelY = 0; // Velocidad en el eje Y
 
@@ -504,7 +504,7 @@ const raindrops = [];
 function createRaindrop() {
   const x = canvas.width + 1; // Start off the right side of the canvas
   const y = Math.random() * canvas.height; // Random vertical position
-  const speed = Math.random() * 3 + 3; // Speed of the raindrop
+  const speed = Math.random() * 7 + 7; // Speed of the raindrop
   const length = Math.random() * 9 + 2; // Length of the raindrop
 
   raindrops.push({ x, y, speed, length });
