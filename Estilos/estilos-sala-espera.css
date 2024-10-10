@@ -1,0 +1,134 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    /* Imagen de fondo predeterminada (Desktop) */
+    background-image: url('/SetQuest-main/Imagenes/Fondo-Sala-Espera.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    padding-top: 50px;
+    position: relative; /* Para que el contenido esté sobre la imagen */
+    z-index: 1;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px #000; /* Sombra al texto */
+}
+
+.card {
+    background-color: rgba(0, 0, 0, 0.916); /* Fondo translúcido oscuro */
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.list-group-item {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-group-item img {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-custom {
+    background: linear-gradient(45deg, #ff6600, #000000);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    border-radius: 50px; /* Botones redondeados */
+    width: 100%;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.btn-custom:hover {
+    background: linear-gradient(45deg, #1500ff, #6a00ff);
+    transform: scale(1.05); /* Efecto de agrandamiento al hover */
+}
+
+.code-box {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.code-box input {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.code-box input:focus {
+    outline: none;
+}
+
+.bottom-text {
+    margin-top: 50px;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 3px #000;
+}
+
+/* Diseño responsivo para dispositivos móviles */
+@media (max-width: 768px) {
+    body, html {
+        /* Cambiar a la imagen de fondo para móviles */
+        background-image: url('/SetQuest-main/Imagenes/Fondo-Mobil-Espera.jpg');
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .btn-custom {
+        font-size: 1.2rem;
+        padding: 10px;
+    }
+
+    .list-group-item {
+        font-size: 1rem;
+    }
+}
+
+/* Icono del micrófono personalizado */
+.microphone-icon {
+    background-image: url('/SetQuest-main/Imagenes/Verificado-Espera.png');
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    display: inline-block; /* Asegura que el icono se muestre correctamente */
+}

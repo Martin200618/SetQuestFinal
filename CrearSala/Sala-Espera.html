@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sala de espera</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/SetQuest-main/Estilos/estilos-sala-espera.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Sala de espera</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-3">
+                <div class="card">
+                    <h3>Orbitando la Sala</h3><br>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <span>(N+)inja</span>
+                            <span class="microphone-icon"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <span>MxClovin</span>
+                            <span class="microphone-icon"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <span>Juanzx</span>
+                            <span class="microphone-icon"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <span>Master86</span>
+                            <span class="microphone-icon"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-5 mb-3">
+                <div class="card">
+                    <h3>Código para unirse</h3>
+                    <div class="code-box">
+                        <h1 id="codigoSala"></h1>
+                    </div>
+                    <script>
+                        const codigoSala = localStorage.getItem("codigoSala"); // Recupera el código almacenado
+                        document.getElementById("codigoSala").innerText =
+                          codigoSala || "2503494"; // Muestra el código en la página o un valor predeterminado
+                      </script>
+                </div>
+                <button class="btn btn-custom mt-4">Iniciar Partida</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
