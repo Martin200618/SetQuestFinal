@@ -12,12 +12,13 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre_ususario = $_POST['nombre_usuario'];
-    $correo = $_POST['correo'];
-    $contraseña = password_hash($_POST['contraseña'], PASSWORD_BCRYPT);
+    // Asegúrate de obtener el nombre del usuario del formulario correctamente
+    $nombre_usuario = $_POST['nombre_usuario'] ?? ''; // Cambia a 'nombre_usuario'
+    $correo = $_POST['correo'] ?? ''; // Asegúrate de que esto esté presente
+    $contrasena = password_hash($_POST['contrasena'], PASSWORD_BCRYPT);
 
     // Validar que no se repita el correo ni el nick
-    $sql = "SELECT * FROM usuario WHERE correo='$correo' OR nombre_usuario='$nombre_ususario'";
+    $sql = "SELECT * FROM usuario WHERE correo='$correo' OR nombre_usuario='$nombre_usuario'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -34,11 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else {
         // Insertar el nuevo usuario
-        $sql = "INSERT INTO usuario (nombre_usuario, correo, contraseña) VALUES ('$nombre_usuario', '$correo', '$contraseña')";
+        $sql = "INSERT INTO usuario (nombre_usuario, correo, contrasena) VALUES ('$nombre_usuario', '$correo', '$contrasena')";
 
         if ($conn->query($sql) === TRUE) {
             // Registro exitoso, redirigir con éxito
-            header('Location: ./login.html');
+            header('Location: ./login.html?success=1');
             exit();
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;

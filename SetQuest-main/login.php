@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correo = $_POST['correo'];
-    $contraseña = $_POST['contraseña'];
+    $contrasena = $_POST['contrasena'];
     // Usar prepared statements para evitar inyecciones SQL
     $sql = $conn->prepare("SELECT * FROM usuario WHERE correo = ?");
     $sql->bind_param('s', $correo);
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        if (password_verify($contraseña, $user['contraseña'])) {  // Cambié $usuario a $user
+        if (password_verify($contrasena, $user['contrasena'])) {  // Cambié $usuario a $user
             $_SESSION['usuario'] = $user['nombre_completo'];
             header('Location: ./seleccion-modos.html');
             exit();  // Detener el script tras la redirección
