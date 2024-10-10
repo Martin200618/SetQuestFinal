@@ -434,11 +434,6 @@ function MoverDinosaurio() {
   dino.style.bottom = dinoPosY + "px";
 }
 
-function TocarSuelo() {
-  dinoPosY = sueloY;
-  velY = 0;
-  saltando = false;
-}
 
 function MoverSuelo() {
   sueloX -= CalcularDesplazamiento();

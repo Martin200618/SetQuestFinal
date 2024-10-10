@@ -80,6 +80,7 @@ body {
 }
 
 .arrow {
+  font-weight: bold;
   border: #01ddfa 2px solid;
   width: 5vw; /* Usa una unidad relativa para ancho */
   height: 5vw; /* Mantiene la proporción de las flechas */
@@ -92,9 +93,11 @@ body {
   cursor: pointer;
   user-select: none;
   margin: 5px 0; /* Espacio entre las flechas */
+  transition: transform 0.3s ease;
 }
 
 .arrow:hover {
+  transform: scale(1.2);
   background-color: rgba(94, 94, 94, 0.8);
   border: #3802fc 2px solid;
 }
