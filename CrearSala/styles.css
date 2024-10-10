@@ -45,6 +45,10 @@ canvas {
   background: linear-gradient(135deg, #5911f2, #290987);
 }
 
+.card.hello {
+    background: linear-gradient(135deg, #edfe00, #290987);
+  }
+
 .card .product {
   height: 85%;
   padding: 10px;
@@ -67,8 +71,9 @@ canvas {
   font-style: italic;
   opacity: 0.7;
 }
+
 .product img {
-  height: 280px;
+  height: 210px;
   position: absolute;
   top: 50%;
   left: 50%;
