@@ -1,50 +1,79 @@
 <?php
-// Conexión a la base de datos
-$servername = "localhost";
-$username = "root";  // Cambia esto si tienes otro usuario
-$password = "";  // Cambia esto si tienes contraseña
-$dbname = "setquest";
+class RegistroUsuario {
+    private $conn;
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Asegúrate de obtener el nombre del usuario del formulario correctamente
-    $nombre_usuario = $_POST['nombre_usuario'] ?? ''; // Cambia a 'nombre_usuario'
-    $correo = $_POST['correo'] ?? ''; // Asegúrate de que esto esté presente
-    $contrasena = password_hash($_POST['contrasena'], PASSWORD_BCRYPT);
-
-    // Validar que no se repita el correo ni el nick
-    $sql = "SELECT * FROM usuario WHERE correo='$correo' OR nombre_usuario='$nombre_usuario'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // Verificar si el correo ya está registrado
-        $row = $result->fetch_assoc();
-        if ($row['correo'] == $correo) {
-            header('Location: registro.php?error=correo');
+    // Constructor para inicializar la conexión a la base de datos
+    public function __construct($servername, $username, $password, $dbname) {
+        try {
+            $this->conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
             exit();
-        }
-        // Verificar si el nombre ya está registrado
-        if ($row['nombre_usuario'] == $nombre_usuario) {
-            header('Location: registro.php?error=nombre_usuario');
-            exit();
-        }
-    } else {
-        // Insertar el nuevo usuario
-        $sql = "INSERT INTO usuario (nombre_usuario, correo, contrasena) VALUES ('$nombre_usuario', '$correo', '$contrasena')";
-
-        if ($conn->query($sql) === TRUE) {
-            // Registro exitoso, redirigir con éxito
-            header('Location: ./login.html?success=1');
-            exit();
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
         }
     }
+
+    // Método para registrar un nuevo usuario
+    public function registrar($nombre_usuario, $correo, $contrasena) {
+        // Validar datos del formulario
+        if (empty($nombre_usuario) || empty($correo) || empty($contrasena)) {
+            header('Location: registro.php?error=campos_vacios');
+            exit();
+        }
+
+        // Validar formato del correo
+        if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+            header('Location: registro.php?error=correo_invalido');
+            exit();
+        }
+
+        // Consultar si el correo o el nombre de usuario ya existen
+        $sql = "SELECT * FROM usuario WHERE correo = :correo OR nombre_usuario = :nombre_usuario";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['correo' => $correo, 'nombre_usuario' => $nombre_usuario]);
+
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($row['correo'] == $correo) {
+                header('Location: registro.php?error=correo');
+                exit();
+            }
+            if ($row['nombre_usuario'] == $nombre_usuario) {
+                header('Location: registro.php?error=nombre_usuario');
+                exit();
+            }
+        } else {
+            // Hashear la contraseña
+            $hash_contrasena = password_hash($contrasena, PASSWORD_BCRYPT);
+
+            // Insertar el nuevo usuario
+            $sql = "INSERT INTO usuario (nombre_usuario, correo, contrasena) VALUES (:nombre_usuario, :correo, :contrasena)";
+            $stmt = $this->conn->prepare($sql);
+
+            if ($stmt->execute(['nombre_usuario' => $nombre_usuario, 'correo' => $correo, 'contrasena' => $hash_contrasena])) {
+                // Registro exitoso, redirigir con éxito
+                header('Location: ./login.html?success=1');
+                exit();
+            } else {
+                echo "Error al registrar el usuario.";
+            }
+        }
+    }
+
+    // Destructor para cerrar la conexión
+    public function __destruct() {
+        $this->conn = null;
+    }
 }
-$conn->close();
+
+// Comprobar si la solicitud es POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nombre_usuario = trim($_POST['nombre_usuario'] ?? '');
+    $correo = trim($_POST['correo'] ?? '');
+    $contrasena = $_POST['contrasena'] ?? '';
+
+    // Crear una instancia de la clase RegistroUsuario
+    $registroUsuario = new RegistroUsuario('localhost', 'root', '', 'setquest');
+    $registroUsuario->registrar($nombre_usuario, $correo, $contrasena);
+}
 ?>
