@@ -11,6 +11,7 @@ body, html {
     background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
+    text-decoration: none;
 }
 
 .container {
@@ -56,21 +57,113 @@ h1 {
 }
 
 .btn-custom {
-    background: linear-gradient(45deg, #ff6600, #000000);
+    background: linear-gradient(45deg, #ffffff, #000000);
     color: white;
     border: none;
+    width: 200px;
     padding: 10px 20px;
     font-size: 1.5rem;
     border-radius: 50px; /* Botones redondeados */
-    width: 100%;
     transition: 0.3s;
     font-weight: bold;
+    cursor: pointer; /* Cambia el cursor a mano al pasar */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad */
+    position: relative; /* Para efectos de pseudo-elementos */
+}
+
+.boton-devolverse {
+    font-weight: 900;
+    text-decoration: none; /* Elimina subrayado del enlace */
+  font-family: "Orbitron", sans-serif;
+  position: absolute; /* Posición absoluta para colocar el botón donde queramos */
+  top: 20px; /* Distancia desde la parte superior de la pantalla */
+  left: 20px; /* Distancia desde la parte izquierda de la pantalla */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #5a5a5a; /* Color de fondo rojo */
+  color: white;
+  font-size: 1rem; /* Tamaño de fuente por defecto */
+  padding: 10px 20px; /* Espaciado interno del botón */
+  border-radius: 50px; /* Bordes redondeados */
+  cursor: pointer;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10; /* Asegura que el botón esté por encima de otros elementos */
+}
+
+.boton-devolverse:hover {
+    text-decoration: none;
+  background: #00d0ff; /* Color de fondo al pasar el ratón */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Más sombra al hacer hover */
+}
+
+.boton-devolverse svg {
+  margin-right: 8px; /* Espacio entre el ícono y el texto */
+  fill: white; /* Color del ícono */
+  width: 20px; /* Ajuste del tamaño del ícono */
+  height: 20px;
+}
+
+/* Responsive: Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .boton-devolverse {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    top: 15px; /* Reduce el margen en pantallas más pequeñas */
+    left: 15px;
+  }
+
+  .boton-devolverse svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .boton-devolverse {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    top: 10px; /* Más ajustes para pantallas móviles */
+    left: 10px;
+  }
+
+  .boton-devolverse svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+
+.btn-custom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.2); /* Capa de fondo oscura */
+    z-index: 0; /* Detrás del texto */
+    transition: opacity 0.3s ease; /* Suavidad en la aparición */
+    opacity: 0; /* Inicialmente invisible */
+}
+
+.btn-custom:hover::before {
+    opacity: 1; /* Se hace visible al pasar el ratón */
 }
 
 .btn-custom:hover {
-    background: linear-gradient(45deg, #1500ff, #6a00ff);
+    background: linear-gradient(45deg, #ffffff, #000000);
     transform: scale(1.05); /* Efecto de agrandamiento al hover */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6); /* Sombra más intensa al hacer hover */
 }
+
+.btn-custom:focus {
+    outline: none; /* Sin contorno al enfocarse */
+}
+
 
 .code-box {
     background: rgba(255, 255, 255, 0.2);

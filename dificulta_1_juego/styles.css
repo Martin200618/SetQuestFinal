@@ -41,15 +41,20 @@ canvas {
     box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5); /* Sombra al hacer hover */
 }
 
-.card.blue {
-    background: linear-gradient(135deg, #000000, #000000);
+.card.verde {
+    background: linear-gradient(135deg, #000000, #11d100);
 }
-.card.purple {
-    background: linear-gradient(135deg, #000000, #000000);
+
+.card.amarillo {
+    background: linear-gradient(135deg, #000000, #ffe600);
+}
+
+.card.red {
+    background: linear-gradient(135deg, #000000, #fd0000);
 }
 
 .card.purple {
-    background: linear-gradient(135deg, #000000, #000000);
+    background: linear-gradient(135deg, #5911F2, #290987);
 }
 
 
@@ -132,6 +137,7 @@ canvas {
 }
 
 
+
 .jugar{
     font-weight: bold;
     color: black;
@@ -146,6 +152,7 @@ canvas {
 .jugar:hover{
     scale: 1.1;
 }
+
 
 #crearSala{
     
