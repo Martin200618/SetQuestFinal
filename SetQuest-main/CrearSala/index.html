@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Sala</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="../Juego 2 Asteroides/STYLES/estilos_fondo.css">
+</head>
+<body>
+
+    <canvas id="rainfall"></canvas>
+    <div class="card blue">
+        <div class="product">
+            <span class="number">Creador</span>
+            <img src="./img/astronauta.png">
+        </div>
+        <div class="title">
+            <button id="crearSala">Crear Sala</button>
+        </div>
+    </div>
+
+    <div class="card purple">
+        <div class="product">
+            <span class="number">Usuario</span>
+            <img src="./img/astronautaedit.png">
+        </div>
+        <div class="title">
+            <button id="crearSala">Unirse</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        VanillaTilt.init(document.querySelectorAll(".card"), {
+            max: 25,
+            speed: 5000,
+            glare: true,
+            'max-glare': 0.5,
+        });
+    </script>
+
+    <script>
+        document.getElementById('crearSala').addEventListener('click', function() {
+            const codigoSala = Math.floor(1000 + Math.random() * 9000); // Genera un código de sala entre 1000 y 9999
+            localStorage.setItem('codigoSala', codigoSala); // Almacena el código en localStorage
+            window.location.href = 'unirseSala.html'; // Redirige a la página de unirse
+        });
+    </script>
+    <script src="script.js"></script>
+    <script src="./fondo.js"></script>
+    <script src="./scripfondo.js"></script>
+
+</body>
+</html>

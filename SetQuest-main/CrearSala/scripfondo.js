@@ -10,10 +10,10 @@ const raindrops = [];
 
 // Function to create a new raindrop
 function createRaindrop() {
-    const x = canvas.width + 1; // Start off the right side of the canvas
-    const y = Math.random() * canvas.height; // Random vertical position
-    const speed = Math.random() * 3 + 3; // Speed of the raindrop
-    const length = Math.random() * 9 + 2; // Length of the raindrop
+    const x = Math.random() * canvas.width;
+    const y = -1;
+    const speed = Math.random() * 2 + 8.5;
+    const length = Math.random() * 9 + 2;
 
     raindrops.push({ x, y, speed, length });
 }
@@ -23,10 +23,9 @@ function updateRaindrops() {
     for (let i = 0; i < raindrops.length; i++) {
         const raindrop = raindrops[i];
 
-        raindrop.x -= raindrop.speed; // Move left
+        raindrop.y += raindrop.speed;
 
-        // Remove raindrop if it goes off the left side of the canvas
-        if (raindrop.x < -raindrop.length) {
+        if (raindrop.y > canvas.height) {
             raindrops.splice(i, 1);
             i--;
         }
@@ -45,7 +44,7 @@ function drawRaindrops() {
 
         ctx.beginPath();
         ctx.moveTo(raindrop.x, raindrop.y);
-        ctx.lineTo(raindrop.x - raindrop.length, raindrop.y); // Draw line to the left
+        ctx.lineTo(raindrop.x, raindrop.y + raindrop.length);
         ctx.stroke();
     }
 }
