@@ -1,0 +1,105 @@
+{
+    "arrows": {
+      "leftArrow": {
+        "elementId": "left-arrow",
+        "touchstart": {
+          "dinoVelX": -300
+        },
+        "touchend": {
+          "dinoVelX": 0
+        }
+      },
+      "rightArrow": {
+        "elementId": "right-arrow",
+        "touchstart": {
+          "dinoVelX": 300
+        },
+        "touchend": {
+          "dinoVelX": 0
+        }
+      },
+      "upArrow": {
+        "elementId": "up-arrow",
+        "touchstart": {
+          "dinoVelY": 300
+        },
+        "touchend": {
+          "dinoVelY": 0
+        }
+      },
+      "downArrow": {
+        "elementId": "down-arrow",
+        "touchstart": {
+          "dinoVelY": -300
+        },
+        "touchend": {
+          "dinoVelY": 0
+        }
+      }
+    },
+    "keyboard": {
+      "zoomControl": {
+        "event": "keydown",
+        "preventZoom": {
+          "ctrlKey": true,
+          "keys": ["+", "-", "="]
+        }
+      },
+      "movementControl": {
+        "keys": {
+          "leftArrow": {
+            "keyCode": 37,
+            "dinoVelX": -300
+          },
+          "rightArrow": {
+            "keyCode": 39,
+            "dinoVelX": 300
+          },
+          "upArrow": {
+            "keyCode": 38,
+            "dinoVelY": 300
+          },
+          "downArrow": {
+            "keyCode": 40,
+            "dinoVelY": -300
+          }
+        }
+      }
+    },
+    "game": {
+      "initialization": {
+        "time": 0,
+        "deltaTime": 0,
+        "countdownDuration": 3,
+        "backgroundMusic": "background-music",
+        "gameStart": true
+      },
+      "movementSettings": {
+        "dinoPosX": 42,
+        "dinoPosY": 22,
+        "velY": 0,
+        "impulso": 900,
+        "gravedad": 2500
+      },
+      "obstacles": {
+        "creationInterval": {
+          "min": 1.0,
+          "max": 3.0
+        },
+        "movementSpeed": 1.7
+      },
+      "stars": {
+        "creationInterval": {
+          "min": 0.5,
+          "max": 2.5
+        },
+        "movementSpeed": 2
+      },
+      "score": {
+        "currentScore": 0,
+        "collisionPenalty": -2,
+        "starReward": 1
+      }
+    }
+  }
+  

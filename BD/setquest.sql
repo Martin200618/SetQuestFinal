@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2024 a las 20:19:07
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 11-10-2024 a las 18:53:02
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,45 +24,105 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ranking`
+-- Estructura de tabla para la tabla `cuenta_activacion`
 --
 
-CREATE TABLE `ranking` (
-  `id_posicion` bigint(20) NOT NULL,
-  `puntucion` int(11) NOT NULL
+CREATE TABLE `cuenta_activacion` (
+  `cuenta_activacion_id` int(11) NOT NULL,
+  `activacion` int(11) DEFAULT NULL,
+  `activacion_codigo` int(11) DEFAULT NULL,
+  `expiracion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Estructura de tabla para la tabla `login`
 --
 
-CREATE TABLE `usuario` (
-  `id` bigint(20) NOT NULL,
-  `nombre_usuario` varchar(255) NOT NULL,
-  `correo` varchar(255) NOT NULL,
-  `contraseña` varchar(255) NOT NULL,
-  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `login` (
+  `login_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `dos_pasos_verificacion_id` int(11) DEFAULT NULL,
+  `contrasena` varchar(20) DEFAULT NULL,
+  `correo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`id`, `nombre_usuario`, `correo`, `contraseña`, `fecha_creacion`) VALUES
-(1, '', 'martinstibennarvaez2006@gmail.com', '$2y$10$Iu85K8xbAhCF9Z7ZOu.ni.zr8wBLDKtODHTp4U4mVI5CYl.y6PWHC', '2024-10-09 18:10:51');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario_ranking`
+-- Estructura de tabla para la tabla `ranking_global`
 --
 
-CREATE TABLE `usuario_ranking` (
-  `id` bigint(20) NOT NULL,
-  `usuario_id` bigint(20) NOT NULL,
-  `ranking_id` bigint(20) NOT NULL
+CREATE TABLE `ranking_global` (
+  `id_usuario_ranking` int(11) NOT NULL,
+  `nick_usuario` varchar(12) DEFAULT NULL,
+  `puntuacion_global` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ranking_partida`
+--
+
+CREATE TABLE `ranking_partida` (
+  `id_ranking` int(11) NOT NULL,
+  `nick_usuario` varchar(12) DEFAULT NULL,
+  `puesto_partida` int(11) DEFAULT NULL,
+  `puntaje_partida` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recuperacion_contrasena`
+--
+
+CREATE TABLE `recuperacion_contrasena` (
+  `recuperar_contrasena_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `codigo` int(11) DEFAULT NULL,
+  `codigo_estatus` int(11) DEFAULT NULL,
+  `fecha_recuperacion` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sala`
+--
+
+CREATE TABLE `sala` (
+  `id_sala` int(11) NOT NULL,
+  `codigo_sala` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id_usuario` int(11) NOT NULL,
+  `nombre_usuario` varchar(255) DEFAULT NULL,
+  `nick_usuario` varchar(12) DEFAULT NULL,
+  `cuenta_activacion_id` int(11) DEFAULT NULL,
+  `id_usuario_sala` int(11) DEFAULT NULL,
+  `fecha_creacion` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_sala`
+--
+
+CREATE TABLE `usuarios_sala` (
+  `id_usuario_sala` int(11) NOT NULL,
+  `nick_usuario` varchar(12) DEFAULT NULL,
+  `codigo_sala` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -70,58 +130,104 @@ CREATE TABLE `usuario_ranking` (
 --
 
 --
--- Indices de la tabla `ranking`
+-- Indices de la tabla `cuenta_activacion`
 --
-ALTER TABLE `ranking`
-  ADD PRIMARY KEY (`id_posicion`);
+ALTER TABLE `cuenta_activacion`
+  ADD PRIMARY KEY (`cuenta_activacion_id`);
 
 --
--- Indices de la tabla `usuario`
+-- Indices de la tabla `login`
 --
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre_usuario` (`nombre_usuario`);
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`login_id`);
 
 --
--- Indices de la tabla `usuario_ranking`
+-- Indices de la tabla `ranking_global`
 --
-ALTER TABLE `usuario_ranking`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `usuario_id` (`usuario_id`),
-  ADD KEY `ranking_id` (`ranking_id`);
+ALTER TABLE `ranking_global`
+  ADD PRIMARY KEY (`id_usuario_ranking`);
+
+--
+-- Indices de la tabla `ranking_partida`
+--
+ALTER TABLE `ranking_partida`
+  ADD PRIMARY KEY (`id_ranking`);
+
+--
+-- Indices de la tabla `recuperacion_contrasena`
+--
+ALTER TABLE `recuperacion_contrasena`
+  ADD PRIMARY KEY (`recuperar_contrasena_id`);
+
+--
+-- Indices de la tabla `sala`
+--
+ALTER TABLE `sala`
+  ADD PRIMARY KEY (`id_sala`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id_usuario`);
+
+--
+-- Indices de la tabla `usuarios_sala`
+--
+ALTER TABLE `usuarios_sala`
+  ADD PRIMARY KEY (`id_usuario_sala`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `ranking`
+-- AUTO_INCREMENT de la tabla `cuenta_activacion`
 --
-ALTER TABLE `ranking`
-  MODIFY `id_posicion` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `cuenta_activacion`
+  MODIFY `cuenta_activacion_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `usuario`
+-- AUTO_INCREMENT de la tabla `login`
 --
-ALTER TABLE `usuario`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `login`
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `usuario_ranking`
+-- AUTO_INCREMENT de la tabla `ranking_global`
 --
-ALTER TABLE `usuario_ranking`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ranking_global`
+  MODIFY `id_usuario_ranking` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT de la tabla `ranking_partida`
 --
+ALTER TABLE `ranking_partida`
+  MODIFY `id_ranking` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Filtros para la tabla `usuario_ranking`
+-- AUTO_INCREMENT de la tabla `recuperacion_contrasena`
 --
-ALTER TABLE `usuario_ranking`
-  ADD CONSTRAINT `usuario_ranking_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`),
-  ADD CONSTRAINT `usuario_ranking_ibfk_2` FOREIGN KEY (`ranking_id`) REFERENCES `ranking` (`id_posicion`);
+ALTER TABLE `recuperacion_contrasena`
+  MODIFY `recuperar_contrasena_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `sala`
+--
+ALTER TABLE `sala`
+  MODIFY `id_sala` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios_sala`
+--
+ALTER TABLE `usuarios_sala`
+  MODIFY `id_usuario_sala` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
