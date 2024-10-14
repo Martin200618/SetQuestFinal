@@ -3,22 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css">
-    
+    <link rel="stylesheet" href="./style.css" />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
     <title>Document</title>
     <style>
-      body{
+      body {
+        font-family: 'Orbitron', sans-serif;
         margin: 0;
-        background: #000;
-        
+        background: linear-gradient(
+            0deg,
+            #43cea2,
+            #185a9d
+          ); /* Tercer color */        animation: gradientBackground 10s ease infinite;
       }
+
     </style>
   </head>
-  <body>  
+  <body>
+
+    <!-- Modal HTML -->
+    <div id="gameOverModal" class="modal">
+      <div class="modal-content">
+        <h2 class="juego-terminado">¡Juego Terminado!</h2>
+        <p class="score-estrellas">Estrellas recogidas: <span id="estrellasCount">0</span></p>
+        <p class="score-estrellas">Diamantes recogidos: <span id="diamantesCount">0</span></p>
+        <p class="score-estrellas">Esmeraldas recogidas: <span id="esmeraldasCount">0</span></p>
+        <div class="modal-buttons">
+          <button id="retryBtn" class="modal-btn">Reintentar</button>
+          <a id="exitBtn" class="modal-btn pulsing" href="../modos-de-juego/">Salir</a>
+        </div>
+      </div>
+    </div>
 
     <script src="./phaser.min.js" class="containe"></script>
     <script src="./script.js"></script>
-
   </body>
-
 </html>

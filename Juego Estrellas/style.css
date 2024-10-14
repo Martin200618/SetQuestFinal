@@ -1,0 +1,119 @@
+.modal {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semi-transparente */
+  }
+  
+  .modal-content {
+    background-color: #222;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    height: 320px;
+    max-width: 500px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+  
+  .modal-content h2 {
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 20px;
+  }
+  
+  .modal-content p {
+    font-size: 1.5rem;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal-buttons {
+    margin-top: 20px;
+  }
+  
+  .modal-btn {
+    border: none; /* Eliminamos el borde predeterminado */
+    text-decoration: none;
+    padding: 12px 24px; /* Aumentamos el padding */
+    margin: 10px;
+    font-size: 1.4rem; /* Aumentamos el tamaño de la fuente */
+    background-color: #ff007f; /* Color del botón */
+    color: white;
+    border-radius: 8px; /* Bordes más redondeados */
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s; /* Transiciones para el hover y transform */
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(255, 0, 127, 0.5); /* Sombra para un efecto elevado */
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .modal-btn:hover {
+    background-color: #56001d; /* Color en hover */
+    transform: scale(1.05); /* Escala en hover */
+    box-shadow: 0 6px 30px rgba(255, 0, 127, 0.7); /* Aumenta la sombra al hacer hover */
+  }
+  
+  .modal-btn:active {
+    transform: scale(0.95); /* Efecto de presionar el botón */
+    box-shadow: 0 2px 15px rgba(255, 0, 127, 0.5); /* Sombra más pequeña al hacer clic */
+  }
+  
+  /* Animación adicional para el botón */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .modal-btn.pulsing {
+    animation: pulse 1.5s infinite; /* Agrega una animación de pulso */
+  }
+  
+  .juego-terminado {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem; /* Tamaño de fuente deseado */
+    font-weight: bold; /* Hacer el texto más destacado */
+    animation: rainbow 1s linear infinite; /* Añade la animación */
+  }
+  
+  @keyframes rainbow {
+    0% { color: red; }
+    16.67% { color: orange; }
+    33.33% { color: yellow; }
+    50% { color: green; }
+    66.67% { color: blue; }
+    83.33% { color: indigo; }
+    100% { color: violet; }
+  }
+  
+  .score-estrellas {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem; /* Tamaño de fuente deseado */
+    font-weight: bold; /* Hacer el texto más destacado */
+  }
+  
