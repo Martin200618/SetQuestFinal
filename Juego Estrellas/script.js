@@ -240,8 +240,8 @@ function update() {
         return;
     }
 
-    const speed = 160; // Velocidad normal
-    const boostSpeed = 2000; // Velocidad al impulsarse
+    const speed = 200; // Velocidad normal
+    const boostSpeed = 3000; // Velocidad al impulsarse
 
     // Movimiento hacia la izquierda
     if (cursors.left.isDown) {
@@ -289,24 +289,34 @@ function updateDiamondText() {
 }
 
 // Función para disparar un láser
+// Función para disparar un láser
 function fireLaser() {
-  if (score > 0) {
-    var laser = lasers.get(player.x, player.y - 20); // Posición del láser
-
-    if (laser) {
-      laser.setActive(true);
-      laser.setVisible(true);
-      laser.body.allowGravity = false; // El láser no cae por gravedad
-      laser.setVelocityY(-500); // Velocidad del láser hacia arriba
-
-      // Restar una estrella al disparar un láser
-      score -= 5;
-      scoreText.setText("Estrellas: " + score);
+    if (score >= 5) { // Asegúrate de tener suficiente puntuación
+      let laser = lasers.get(player.x, player.y - 20); // Posición del láser
+      if (laser) {
+        laser.setActive(true);
+        laser.setVisible(true);
+        laser.body.allowGravity = false; // El láser no cae por gravedad
+  
+        // Determinar dirección del disparo
+        if (cursors.left.isDown) {
+          laser.setVelocityX(-500); // Disparar hacia la izquierda
+        } else if (cursors.right.isDown) {
+          laser.setVelocityX(500); // Disparar hacia la derecha
+        } else {
+          laser.setVelocityX(0); // No se mueve horizontalmente
+          laser.setVelocityY(-500); // Disparar hacia arriba
+        }
+  
+        // Restar una estrella al disparar un láser
+        score -= 5;
+        scoreText.setText("Estrellas: " + score);
+      }
+    } else {
+      console.log("No tienes suficientes estrellas para disparar");
     }
-  } else {
-    console.log("No tienes suficientes estrellas para disparar");
   }
-}
+  
 
 // Función para destruir una bomba al impactar con el láser
 function destroyBomb(laser, bomb) {
