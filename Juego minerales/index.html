@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Minerales</title>
+    <style>
+      body {
+        overflow: hidden;
+        font-family: "Orbitron", sans-serif;
+        margin: 0;
+        background: linear-gradient(0deg, #43cea2, #185a9d); /* Tercer color */
+        animation: gradientBackground 10s ease infinite;
+      }
+
+      #leftButton,
+      #rightButton,
+      #jumpButton,
+      #fireButton {
+        position: absolute;
+        opacity: 0.5; /* Para hacerlos semitransparentes */
+      }
+      #leftButton {
+        left: 10px;
+        bottom: 50px;
+      }
+      #rightButton {
+        left: 100px;
+        bottom: 50px;
+      }
+      #jumpButton {
+        right: 100px;
+        bottom: 50px;
+      }
+      #fireButton {
+        right: 10px;
+        bottom: 150px;
+      }
+
+      #slideButton {
+        position: absolute;
+        right: 10px;
+        bottom: 50px;
+        opacity: 0.5;
+      }
+
+      #diamantesCount{
+        color: #00ffd8;
+      }
+      #esmeraldasCount{
+        color: rgb(0, 255, 0);
+      }
+
+      #estrellasCount{
+        color: rgb(255, 230, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Modal HTML -->
+    <div id="gameOverModal" class="modal">
+      <div class="modal-content">
+        <h2 class="juego-terminado">¡Has Explotado!</h2>
+        <p class="score-estrellas">
+          Estrellas recogidas: <span id="estrellasCount">0</span>
+        </p>
+        <p class="score-estrellas">
+          Diamantes recogidos: <span id="diamantesCount">0</span>
+        </p>
+        <p class="score-estrellas">
+          Esmeraldas recogidas: <span id="esmeraldasCount">0</span>
+        </p>
+        <div class="modal-buttons">
+          <button id="retryBtn" class="modal-btn">Reintentar</button>
+          <a id="exitBtn" class="modal-btn pulsing" href="../modos-de-juego/"
+            >Salir</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rexplugins@1.1.1/dist/rexvirtualjoystickplugin.min.js"></script>
+    <script src="./phaser.min.js" class="containe"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
