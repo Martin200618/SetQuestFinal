@@ -1,6 +1,6 @@
 var config = {
   type: Phaser.AUTO,
-  width: 1200,
+  width: 1395,
   height: 600,
   physics: {
     default: "arcade",
@@ -44,14 +44,15 @@ var rightPressed = false;
 var jumpPressed = false;
 
 function preload() {
-  this.load.image("sky", "assets/skyfondo.webp");
+  this.load.image("sky", "assets/sky.jpg");
   this.load.image("ground", "assets/platformlava.png");
+  this.load.image("ground2", "assets/suelo_lava_renderized.jpg");
   this.load.image("star", "assets/star.png");
   this.load.image("diamond", "assets/diamanted.png"); // Cargar imagen del diamante
   this.load.image("emerald", "assets/esmeraldad.png"); // Cargar imagen de la esmeralda
   this.load.image("bomb", "assets/bomb.png");
   this.load.image("laser", "assets/star.png"); // Cargar láser rojo
-  this.load.spritesheet("dude", "assets/dude.png", {
+  this.load.spritesheet("dude", "assets/personaje-2.png", {
     frameWidth: 32,
     frameHeight: 48,
   });
@@ -59,12 +60,12 @@ function preload() {
 
   this.load.image("leftButton", "assets/Boton_izquierda.png");  // Imagen para el botón izquierdo
   this.load.image("rightButton", "assets/boton-derecha.png");  // Imagen para el botón derecho
-  this.load.image("jumpButton", "assets/Boton arriba.png"); 
+  this.load.image("jumpButton", "assets/Boton arriba.png");
 
 
   this.load.image("laserButton", "assets/disparar.png"); // Imagen para el botón de lanzar láser
   this.load.image("slideButton", "assets/deslizarse.png"); // Imagen para el botón de deslizarse
-  
+
   this.load.audio("backgroundMusic", "assets/Musicadefondo.mp3"); // Reemplaza la ruta con la del archivo de sonido
   this.load.audio(
     "collectStarSound",
@@ -83,6 +84,10 @@ function preload() {
 function isMobile() {
   return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
+
+
+let movingPlatform; // Variable para la plataforma que se moverá
+let platformSpeed = 100; // Velocidad de la plataforma
 
 function create() {
   this.add.image(600, 300, "sky");
@@ -103,7 +108,7 @@ function create() {
     jumpButton = this.add.image(game.config.width - 50, game.config.height - 50, 'jumpButton').setInteractive();
     // Botón para lanzar láser
     fireButtonMobile = this.add.image(game.config.width - 500, game.config.height - 50, 'laserButton').setInteractive();
-    
+
     // Botón para deslizarse
     slideButton = this.add.image(550, game.config.height - 50, 'slideButton').setInteractive();
 
@@ -171,8 +176,7 @@ function create() {
   this.collectEmeraldSound = this.sound.add("collectEmeraldSound");
 
   platforms = this.physics.add.staticGroup();
-  platforms.create(400, 550, "ground").setScale(5).refreshBody();
-  platforms.create(400, 250, "ground");
+  platforms.create(550, 550, "ground2").setScale(1).refreshBody();
   platforms.create(50, 100, "ground");
   platforms.create(750, 100, "ground");
   platforms.create(50, 400, "ground");
@@ -182,6 +186,15 @@ function create() {
   player = this.physics.add.sprite(100, 450, "dude");
   player.setCollideWorldBounds(true);
   player.setBounce(0.2);
+
+
+  movingPlatform = this.physics.add.image(800, 250, "ground").setImmovable(true);
+  movingPlatform.body.allowGravity = false; // Para evitar que la gravedad la afecte
+  movingPlatform.setVelocityX(platformSpeed); // Velocidad inicial
+
+  // Agrega colisión entre el jugador y la plataforma que se mueve
+  this.physics.add.collider(player, movingPlatform);
+
 
   this.anims.create({
     key: "left",
@@ -213,10 +226,12 @@ function create() {
     key: "star",
     repeat: 11,
     setXY: { x: 12, y: 0, stepX: 100 },
+    collideWorldBounds: true // Para evitar que salgan de la pantalla
   });
 
   stars.children.iterate(function (child) {
-    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.5));
+    child.setCollideWorldBounds(true); // Asegurarse de que cada estrella no salga de la pantalla
   });
 
   this.physics.add.collider(stars, platforms);
@@ -230,7 +245,7 @@ function create() {
   });
 
   diamonds.children.iterate(function (child) {
-    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.5));
   });
 
   this.physics.add.collider(diamonds, platforms);
@@ -244,7 +259,7 @@ function create() {
   });
 
   emeralds.children.iterate(function (child) {
-    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.5));
   });
 
   this.physics.add.collider(emeralds, platforms);
@@ -327,6 +342,25 @@ function update() {
     return;
   }
 
+  this.physics.add.collider(diamonds, movingPlatform);
+  this.physics.add.collider(emeralds, movingPlatform);
+  this.physics.add.collider(stars, movingPlatform);
+  this.physics.add.collider(bombs, movingPlatform);
+
+
+  if (movingPlatform.x >= 800) { // Límite derecho
+    movingPlatform.setVelocityX(-platformSpeed); // Cambia la dirección hacia la izquierda
+  } else if (movingPlatform.x <= 200) { // Límite izquierdo
+    movingPlatform.setVelocityX(platformSpeed); // Cambia la dirección hacia la derecha
+  }
+
+
+  lasers.children.iterate(function(laser) {
+    if (laser && laser.y < 0) { // Si el láser sale de la parte superior de la pantalla
+      laser.destroy(); // Destruir el láser
+    }
+  });
+
   const speed = 200; // Velocidad normal
   const boostSpeed = 3000; // Velocidad al impulsarse
 
@@ -341,8 +375,8 @@ function update() {
       diamondCount -= 1; // Restar un diamante
       updateDiamondText(); // Actualizar el texto de diamantes
     }
-  } 
-  // Movimiento hacia la derecha
+  }
+       // Movimiento hacia la derecha
   else if (cursors.right.isDown || rightPressed) {
     player.setVelocityX(speed);
     player.anims.play("right", true);
@@ -353,7 +387,7 @@ function update() {
       diamondCount -= 1; // Restar un diamante
       updateDiamondText(); // Actualizar el texto de diamantes
     }
-  } 
+  }
   // Sin movimiento
   else {
     player.setVelocityX(0);
@@ -371,10 +405,6 @@ function update() {
   }
 }
 
-function updateDiamondText() {
-  diamondText.setText("Diamantes: " + diamondCount);
-}
-
 // Función para actualizar el texto de diamantes
 function updateDiamondText() {
   diamondText.setText("Diamantes: " + diamondCount);
@@ -385,7 +415,7 @@ function updateDiamondText() {
 function fireLaser() {
   if (score >= 5) {
     // Asegúrate de tener suficiente puntuación
-    let laser = lasers.get(player.x, player.y - 20); // Posición del láser
+    let laser = lasers.get(player.x, player.y - 2); // Posición del láser
     if (laser) {
       laser.setActive(true);
       laser.setVisible(true);
