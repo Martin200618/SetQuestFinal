@@ -44,7 +44,7 @@ var rightPressed = false;
 var jumpPressed = false;
 
 function preload() {
-  this.load.image("sky", "assets/sky.jpg");
+  this.load.image("sky", "assets/Fondo4.jpg");
   this.load.image("ground", "assets/platformlava.png");
   this.load.image("ground2", "assets/suelo_lava_renderized.jpg");
   this.load.image("star", "assets/star.png");
@@ -90,7 +90,7 @@ let movingPlatform; // Variable para la plataforma que se moverá
 let platformSpeed = 100; // Velocidad de la plataforma
 
 function create() {
-  this.add.image(600, 300, "sky");
+  this.add.image(700, 200, "sky");
 
   // Crear el objeto de sonido
   var music = this.sound.add("backgroundMusic");
@@ -178,6 +178,7 @@ function create() {
   platforms = this.physics.add.staticGroup();
   platforms.create(550, 550, "ground2").setScale(1).refreshBody();
   platforms.create(50, 100, "ground");
+  platforms.create(200, 250, "ground");
   platforms.create(750, 100, "ground");
   platforms.create(50, 400, "ground");
   platforms.create(750, 400, "ground");
@@ -188,12 +189,8 @@ function create() {
   player.setBounce(0.2);
 
 
-  movingPlatform = this.physics.add.image(800, 250, "ground").setImmovable(true);
-  movingPlatform.body.allowGravity = false; // Para evitar que la gravedad la afecte
-  movingPlatform.setVelocityX(platformSpeed); // Velocidad inicial
 
-  // Agrega colisión entre el jugador y la plataforma que se mueve
-  this.physics.add.collider(player, movingPlatform);
+
 
 
   this.anims.create({
@@ -342,17 +339,6 @@ function update() {
     return;
   }
 
-  this.physics.add.collider(diamonds, movingPlatform);
-  this.physics.add.collider(emeralds, movingPlatform);
-  this.physics.add.collider(stars, movingPlatform);
-  this.physics.add.collider(bombs, movingPlatform);
-
-
-  if (movingPlatform.x >= 800) { // Límite derecho
-    movingPlatform.setVelocityX(-platformSpeed); // Cambia la dirección hacia la izquierda
-  } else if (movingPlatform.x <= 200) { // Límite izquierdo
-    movingPlatform.setVelocityX(platformSpeed); // Cambia la dirección hacia la derecha
-  }
 
 
   lasers.children.iterate(function(laser) {
