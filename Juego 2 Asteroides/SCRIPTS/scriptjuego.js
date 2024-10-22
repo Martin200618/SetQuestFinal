@@ -493,31 +493,39 @@ function FinalizarJuego() {
 const canvas = document.getElementById("rainfall");
 const ctx = canvas.getContext("2d");
 
-// Set canvas size to match window size
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// Función para ajustar el tamaño del canvas
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
 
-// Create an array to store the raindrops
+// Llamada inicial para establecer el tamaño del canvas al cargar
+resizeCanvas();
+
+// Ajustar el tamaño del canvas cuando cambie el tamaño de la ventana
+window.addEventListener('resize', resizeCanvas);
+
+// Crear un array para almacenar las estrellas
 const raindrops = [];
 
-// Function to create a new raindrop
+// Función para crear una nueva estrella
 function createRaindrop() {
-  const x = canvas.width + 1; // Start off the right side of the canvas
-  const y = Math.random() * canvas.height; // Random vertical position
-  const speed = Math.random() * 3 + 3; // Speed of the raindrop
-  const length = Math.random() * 9 + 2; // Length of the raindrop
+  const x = canvas.width + 1; // Empieza fuera del lado derecho del canvas
+  const y = Math.random() * canvas.height; // Posición vertical aleatoria
+  const speed = Math.random() * 3 + 3; // Velocidad de la estrella
+  const length = Math.random() * 9 + 2; // Longitud de la estrella
 
   raindrops.push({ x, y, speed, length });
 }
 
-// Function to update the raindrops' positions
+// Función para actualizar las posiciones de las estrellas
 function updateRaindrops() {
   for (let i = 0; i < raindrops.length; i++) {
     const raindrop = raindrops[i];
 
-    raindrop.x -= raindrop.speed; // Move left
+    raindrop.x -= raindrop.speed; // Se mueve a la izquierda
 
-    // Remove raindrop if it goes off the left side of the canvas
+    // Eliminar estrella si sale del lado izquierdo del canvas
     if (raindrop.x < -raindrop.length) {
       raindrops.splice(i, 1);
       i--;
@@ -525,32 +533,30 @@ function updateRaindrops() {
   }
 }
 
-// Function to draw the raindrops
+// Función para dibujar las estrellas
 function drawRaindrops() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.strokeStyle = "white";
-  ctx.lineWidth = 2;
+  ctx.strokeStyle = "white"; // Color de las estrellas
+  ctx.lineWidth = 2; // Grosor de las líneas
 
   for (let i = 0; i < raindrops.length; i++) {
     const raindrop = raindrops[i];
 
     ctx.beginPath();
     ctx.moveTo(raindrop.x, raindrop.y);
-    ctx.lineTo(raindrop.x - raindrop.length, raindrop.y); // Draw line to the left
+    ctx.lineTo(raindrop.x - raindrop.length, raindrop.y); // Dibujar la estrella hacia la izquierda
     ctx.stroke();
   }
 }
 
-// Function to animate the raindrops
+// Función para animar las estrellas
 function animate() {
-
-  createRaindrop();
-  updateRaindrops();
-  drawRaindrops();
-  requestAnimationFrame(animate);
-
+  createRaindrop(); // Crear nueva estrella
+  updateRaindrops(); // Actualizar posiciones
+  drawRaindrops(); // Dibujar estrellas
+  requestAnimationFrame(animate); // Volver a ejecutar
 }
 
-// Start the animation
+// Iniciar la animación
 animate();

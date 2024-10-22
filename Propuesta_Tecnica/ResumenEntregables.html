@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+	
+	<title>Resumen entregables</title>
+
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	
+	<!-- Bootstrap -->
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<!-- Icon font -->
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<!-- Fonts -->
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<!-- Custom styles -->
+	<link rel="stylesheet" href="assets/css/styles.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Resumen entregables</span>
+		
+		</h1>
+	</div>
+
+	<nav class="navbar navbar-default navbar-sticky">
+		<div class="container-fluid">
+			
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+			</div>
+			
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="index.html">Inicio</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Propuesta Tenica<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="ResumenEjecutivo.html">Resumen Ejecutivo</a></li>
+							<li><a href="DescripcionDelProyecto.html">Requisitos del proyecto</a></li>
+							<li><a href="CarasteristicasClave.html">Características clave del juego</a></li>
+							<li><a href="CompetidoresYOportunidades.html">Competidores y oportunidades de crecimiento</a></li>
+							<li><a href="SolucionPropuesta.html">Solución propuesta</a></li>
+							<li><a href="PlanDeTrabajo.html">Plan de trabajo</a></li>
+							<li><a href="ResumenEntregables.html">Resumen de entregables</a></li>
+							<li><a href="sidebar-left.html">Presupuesto</a></li>
+							<li><a href="sidebar-left.html">Mantenimiento del juego</a></li>
+							<li><a href="sidebar-left.html">Historias de usuarios</a></li>
+							<li><a href="sidebar-left.html">Requerimientos específicos</a></li>
+							<li><a href="sidebar-left.html">MER</a></li>
+							<li><a href="sidebar-left.html">Diagrama de uso</a></li>
+							<li><a href="sidebar-left.html">Tecnologías y herramientas de desarrollo</a></li>
+							<li><a href="sidebar-left.html">Requisitos del Software</a></li>
+							<li><a href="sidebar-left.html">Requisitos del hadware</a></li>
+
+						</ul>
+					<li><a href="about.html">About</a></li>
+				
+					<li><a href="blog.html">Blog</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->		
+		</div>	
+	</nav>
+</header>
+
+<body>
+	<div id="pdf-container"></div>
+</body>
+
+<script>
+// Obtener el contenedor donde se renderizarán las páginas del PDF
+const contenedorPDF = document.getElementById('pdf-container');
+
+let documentoPDF = null;
+
+// Función para renderizar todas las páginas del PDF
+function renderizarTodasLasPaginas() {
+    for (let numeroPagina = 1; numeroPagina <= documentoPDF.numPages; numeroPagina++) {
+        // Crear un nuevo canvas para cada página
+        const lienzo = document.createElement('canvas');
+        contenedorPDF.appendChild(lienzo);
+        const contexto = lienzo.getContext('2d');
+
+        // Renderizar la página
+        documentoPDF.getPage(numeroPagina).then(function (pagina) {
+            const vista = pagina.getViewport({ scale: 1.1 });
+            lienzo.height = vista.height;
+            lienzo.width = vista.width;
+
+            const contextoRenderizado = {
+                canvasContext: contexto,
+                viewport: vista
+            };
+            pagina.render(contextoRenderizado);
+        });
+    }
+}
+
+// Especificar la ruta del archivo PDF aquí
+const rutaPDF = 'PDF/PLAN DE TRABAJO.PDF';
+
+// Cargar y renderizar el archivo PDF desde la ruta especificada
+pdfjsLib.getDocument(rutaPDF).promise.then(function (documentoPDF_) {
+    documentoPDF = documentoPDF_;
+    renderizarTodasLasPaginas();  // Renderizar todas las páginas
+});
+
+
+</script>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contactos</h3>
+				<div class="widget-body">
+					<p>+57 3046117929<br>
+						<a href="mailto:#">nestordavidruiz741@gmail.com</a><br>
+						<br>
+					</p>	
+				</div>
+				<div class="widget-body">
+					<p>+57 3046117929<br>
+						<a href="mailto:#">nestordavidruiz741@gmail.com</a><br>
+						<br>
+					</p>	
+				</div>
+				<div class="widget-body">
+					<p>+57 3046117929<br>
+						<a href="mailto:#">nestordavidruiz741@gmail.com</a><br>
+						<br>
+					</p>	
+				</div>
+			</div>
+
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Redes Sociales</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href=""><i class="fa fa-twitter fa-2"></i></a>
+						<a href=""><i class="fa fa-dribbble fa-2"></i></a>
+						<a href=""><i class="fa fa-github fa-2"></i></a>
+						<a href=""><i class="fa fa-facebook fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+
+			
+
+			
+
+		</div> <!-- /row of widgets -->
+	</div>
+</footer>
+
+
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+				</div>
+			</div>
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2024, Todos los derechos reservados<br> 
+				</div>
+			</div>
+
+		</div> <!-- /row of widgets -->
+	</div>
+</footer>
+
+
+
+<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>
